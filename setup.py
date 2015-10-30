@@ -1,5 +1,5 @@
 from setuptools import setup
-
+# sudo python setup.py install
 setup(name='lifxlan',
       version='0.2.3',
       description='API for local communication with LIFX devices over a LAN.',
