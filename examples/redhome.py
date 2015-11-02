@@ -27,8 +27,9 @@ colors = {
     "gold": GOLD
 }
 
-Matt_Iphone_IP = "192.168.1.20"
-IPNetwork = "192.168.1.0/24"
+
+Matts_IPhone_IP = "192.168.1.20"
+network = "192.168.1.0/24"
 
 def main():
 
@@ -60,14 +61,11 @@ def main():
                 AutoOnOff = False
                 "Sweet Dreams. 1230 night time"
 
-        address = dottedQuadToNum("192.168.1.20")
-        networka = networkMask("10.0.0.0",24)
-        networkb = networkMask("192.168.1.0",24)
-        print (address,networka,networkb)
-        print addressInNetwork(address,networka)
-        print addressInNetwork(address,networkb)  
+
+
+        print addressInNetwork(Matts_IPhone_IP,network) 
         #Detect IP Leaving House
-        if IP("192.168.1.20") in CIDR("192.168.1.0/24"):
+        if addressInNetwork(Matts_IPhone_IP,network) == True:
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
                 Matt_Home = True
@@ -86,24 +84,13 @@ def main():
 
 
 
-def makeMask(n):
-    "return a mask of n bits as a long integer"
-    return (2L<<n-1) - 1
-
-def dottedQuadToNum(ip):
-    "convert decimal dotted quad string to long integer"
-    return struct.unpack('L',socket.inet_aton(ip))[0]
-
-def networkMask(ip,bits):
-    "Convert a network address to a long integer" 
-    return dottedQuadToNum(ip) & makeMask(bits)
-
 def addressInNetwork(ip,net):
    "Is an address in a network"
-   return ip & net == net
-
-          
-
+   ipaddr = struct.unpack('L',socket.inet_aton(ip))[0]
+   netaddr,bits = net.split('/')
+   netmask = struct.unpack('L',socket.inet_aton(netaddr))[0] & ((2L<<int(bits)-1) - 1)
+   return ipaddr & netmask == netmask
+       
 def toggle_device_power(device, interval=0.5, num_cycles=3): #TEST
     original_power_state = device.get_power()
     device.set_power("off")
