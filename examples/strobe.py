@@ -2,13 +2,28 @@
 from lifxlan import *
 import sys
 
+colors = {
+    "red": RED, 
+    "orange": ORANGE, 
+    "yellow": YELLOW, 
+    "green": GREEN, 
+    "cyan": CYAN, 
+    "blue": BLUE, 
+    "purple": PURPLE, 
+    "pink": PINK, 
+    "white": WHITE, 
+    "cold_white": COLD_WHTE, 
+    "warm_white": WARM_WHITE, 
+    "gold": GOLD
+}
+
 def main():
     num_lights = 6
     lifx = LifxLAN(num_lights)
 
     lifx.set_color_all_lights(white, rapid=True)
     print("Toggling power of all lights...")
-    While True:
+    while True:
         toggle_all_lights_power(lifx, 0.1)
 
 
