@@ -30,8 +30,10 @@ colors = {
 
 Matts_IPhone_IP = "192.168.1.20"
 network = "192.168.1.0/24"
-global Matt_Home = True
-global Matt_Home_TimeOut = 0
+global Matt_Home
+global Matt_Home_TimeOut
+Matt_Home = True
+Matt_Home_TimeOut = 0
 
 def main():
 
