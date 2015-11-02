@@ -30,16 +30,19 @@ colors = {
 
 #Matts_IPhone_IP = "192.168.1.20"
 #network = "192.168.1.0/24"
-address = dottedQuadToNum("192.168.1.20")
-networkb = networkMask("192.168.0.0",24)
+#address = dottedQuadToNum("192.168.1.20")
+#networkb = networkMask("192.168.0.0",24)
 
-Matt_Home = True
-Matt_Home_TimeOut = 0
+
 
 def main():
 
     global Matt_Home
     global Matt_Home_TimeOut
+    address = dottedQuadToNum("192.168.1.20")
+    networkb = networkMask("192.168.0.0",24)
+    Matt_Home = True
+    Matt_Home_TimeOut = 0
 
     num_lights = 6 #Num Lights to control
     print("Discovering lights...")
