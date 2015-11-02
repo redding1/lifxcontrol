@@ -8,7 +8,9 @@ from lifxlan import *
 import sys
 from datetime import datetime
 from time import sleep
+
 from netaddr import IPNetwork, IPAddress
+from netaddr import CIDR, IP
 
 colors = {
     "red": RED, 
@@ -59,7 +61,7 @@ def main():
                 "Sweet Dreams. 1230 night time"
 
         #Detect IP Leaving House
-        if IPAddress("192.168.1.20") in IPNetwork("192.168.1.0/24"):
+        if IP("192.168.1.20") in CIDR("192.168.1.0/24"):
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
                 Matt_Home = True
