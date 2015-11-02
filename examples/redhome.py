@@ -36,7 +36,7 @@ def main():
     devices = lifx.get_lights() # get devices
     print("\nFound {} light(s):\n".format(len(devices)))
     for d in devices:
-    print(d)
+        print(d)
 
     while True:
         sleep(1)
