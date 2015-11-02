@@ -20,3 +20,4 @@ setup(name='lifxlan',
 # tar xvzf python-nmap-0.1.4.tar.gz
 # cd python-nmap-0.1.4.tar.gz
 # sudo python setup.py install
+# tar xvzf https://pypi.python.org/packages/source/n/netaddr/netaddr-0.7.18.tar.gz
