@@ -53,7 +53,7 @@ def main():
                 
         #Turn Off Lights @ 1230am
         if(time.hour == 0 and time.minute == 30):
-            if AutoOnOff = True:
+            if AutoOnOff == True:
                 lifxlan.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
                 "Sweet Dreams. 1230 night time"
@@ -61,11 +61,11 @@ def main():
         #Detect IP Leaving House
         if IPAddress(Matt_Iphone_IP) in IPNetwork(IPNetwork):
             Matt_Home_TimeOut = 0
-            if Matt_Home = False:
+            if Matt_Home == False:
                 Matt_Home = True
                 print "Welcome Home Matt!"
         elif Matt_Home_TimeOut > 200:
-            if Matt_Home = True:
+            if Matt_Home == True:
                 Matt_Home = False
                 print "Goodbye Matt!"
         else:
