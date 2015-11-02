@@ -10,7 +10,7 @@ from datetime import datetime
 from time import sleep
 
 from netaddr import IPNetwork, IPAddress
-from netaddr import CIDR, IP
+import socket,struct
 
 colors = {
     "red": RED, 
@@ -60,6 +60,12 @@ def main():
                 AutoOnOff = False
                 "Sweet Dreams. 1230 night time"
 
+        address = dottedQuadToNum("192.168.1.20")
+        networka = networkMask("10.0.0.0",24)
+        networkb = networkMask("192.168.1.0",24)
+        print (address,networka,networkb)
+        print addressInNetwork(address,networka)
+        print addressInNetwork(address,networkb)  
         #Detect IP Leaving House
         if IP("192.168.1.20") in CIDR("192.168.1.0/24"):
             Matt_Home_TimeOut = 0
@@ -77,6 +83,26 @@ def main():
 #for i in range(0:num_lights-1):
 #if "Living" in devices[i].get_label()       
 #living.append(devices[i])
+
+
+
+def makeMask(n):
+    "return a mask of n bits as a long integer"
+    return (2L<<n-1) - 1
+
+def dottedQuadToNum(ip):
+    "convert decimal dotted quad string to long integer"
+    return struct.unpack('L',socket.inet_aton(ip))[0]
+
+def networkMask(ip,bits):
+    "Convert a network address to a long integer" 
+    return dottedQuadToNum(ip) & makeMask(bits)
+
+def addressInNetwork(ip,net):
+   "Is an address in a network"
+   return ip & net == net
+
+          
 
 def toggle_device_power(device, interval=0.5, num_cycles=3): #TEST
     original_power_state = device.get_power()
