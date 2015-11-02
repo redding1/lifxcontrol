@@ -73,13 +73,15 @@ def main():
             if Matt_Home == False:
                 Matt_Home = True
                 print "Welcome Home Matt!"
-        elif Matt_Home_TimeOut > 200:
-            if Matt_Home == True:
-                Matt_Home = False
-                print "Goodbye Matt!"
         else:
-            Matt_Home_TimeOut += 1
-            print "Matt Timeout: %i" % Matt_Home_TimeOut
+            if Matt_Home_TimeOut > 200:
+                if Matt_Home == True:
+                    Matt_Home = False
+                    print "Goodbye Matt!"
+            else:
+                Matt_Home_TimeOut += 1
+                print "Matt Timeout: %i" % Matt_Home_TimeOut  
+
 
 #for i in range(0:num_lights-1):
 #if "Living" in devices[i].get_label()       
