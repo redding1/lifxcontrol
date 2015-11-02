@@ -69,12 +69,15 @@ def main():
 
         #Detect IP Leaving House
         if addressInNetwork(Matts_IPhone_IP,network) == True:
+            print "Matt in network"
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
                 Matt_Home = True
                 print "Welcome Home Matt!"
         else:
+            print "matt not in network"
             if Matt_Home_TimeOut > 200:
+                print "timeout over 200"
                 if Matt_Home == True:
                     Matt_Home = False
                     print "Goodbye Matt!"
