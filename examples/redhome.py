@@ -25,8 +25,8 @@ colors = {
     "gold": GOLD
 }
 
-Matt_Iphone_IP = "192.168.0.1"
-IPNetwork = "192.168.0.0/24"
+Matt_Iphone_IP = "192.168.1.20"
+IPNetwork = "192.168.1.0/24"
 
 def main():
 
