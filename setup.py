@@ -1,5 +1,5 @@
 from setuptools import setup
-# sudo python setup.py install
+
 setup(name='lifxlan',
       version='0.2.3',
       description='API for local communication with LIFX devices over a LAN.',
@@ -12,3 +12,11 @@ setup(name='lifxlan',
         "bitstring",
 	  ],
       zip_safe=False)
+
+# Program Setup Tips
+# git clone ?
+# sudo python setup.py install
+# sudo wget http://xael.org/pages/python-nmap-0.1.4.tar.gz
+# tar xvzf python-nmap-0.1.4.tar.gz
+# cd python-nmap-0.1.4.tar.gz
+# sudo python setup.py install
