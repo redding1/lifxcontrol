@@ -30,6 +30,7 @@ colors = {
 
 Matts_IPhone_IP = "192.168.1.20"
 network = "192.168.1.0/24"
+Matt_Home = True
 
 def main():
 
@@ -61,9 +62,6 @@ def main():
                 AutoOnOff = False
                 "Sweet Dreams. 1230 night time"
 
-
-
-        print addressInNetwork(Matts_IPhone_IP,network) 
         #Detect IP Leaving House
         if addressInNetwork(Matts_IPhone_IP,network) == True:
             Matt_Home_TimeOut = 0
