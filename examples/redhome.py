@@ -28,8 +28,10 @@ colors = {
 }
 
 
-Matts_IPhone_IP = "192.168.1.20"
-network = "192.168.1.0/24"
+#Matts_IPhone_IP = "192.168.1.20"
+#network = "192.168.1.0/24"
+address = dottedQuadToNum("192.168.1.20")
+networkb = networkMask("192.168.0.0",24)
 
 Matt_Home = True
 Matt_Home_TimeOut = 0
@@ -45,7 +47,7 @@ def main():
     devices = lifx.get_lights() # get devices
     print("\nFound {} light(s):\n".format(len(devices)))
     for d in devices:
-        print(d)
+        #print(d)
 
     while True:
         sleep(1)
@@ -68,7 +70,7 @@ def main():
                 "Sweet Dreams. 1230 night time"
 
         #Detect IP Leaving House
-        if addressInNetwork(Matts_IPhone_IP,network) == True:
+        if addressInNetwork(address,networkb) == True:
             print "Matt in network"
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
@@ -92,12 +94,21 @@ def main():
 
 
 
+def makeMask(n):
+    "return a mask of n bits as a long integer"
+    return (2L<<n-1) - 1
+
+def dottedQuadToNum(ip):
+    "convert decimal dotted quad string to long integer"
+    return struct.unpack('L',socket.inet_aton(ip))[0]
+
+def networkMask(ip,bits):
+    "Convert a network address to a long integer" 
+    return dottedQuadToNum(ip) & makeMask(bits)
+
 def addressInNetwork(ip,net):
    "Is an address in a network"
-   ipaddr = struct.unpack('L',socket.inet_aton(ip))[0]
-   netaddr,bits = net.split('/')
-   netmask = struct.unpack('L',socket.inet_aton(netaddr))[0] & ((2L<<int(bits)-1) - 1)
-   return ipaddr & netmask == netmask
+   return ip & net == net
        
 def toggle_device_power(device, interval=0.5, num_cycles=3): #TEST
     original_power_state = device.get_power()
