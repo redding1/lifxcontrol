@@ -40,7 +40,7 @@ def main():
     global Matt_Home
     global Matt_Home_TimeOut
     address = dottedQuadToNum("192.168.1.20")
-    networkb = networkMask("192.168.0.0",24)
+    networkb = networkMask("192.168.1.0",24)
     Matt_Home = True
     Matt_Home_TimeOut = 0
 
@@ -73,6 +73,7 @@ def main():
                 "Sweet Dreams. 1230 night time"
 
         #Detect IP Leaving House
+        print addressInNetwork(address,networkb)        
         if addressInNetwork(address,networkb) == True:
             print "Matt in network"
             Matt_Home_TimeOut = 0
