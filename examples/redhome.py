@@ -76,9 +76,9 @@ def main():
         #Detect IP Leaving House
         #print addressInNetwork(address,networkb)        
         nm= nmap.PortScanner()
-        nm.scan('192.168.1.2', '80')
-        print nm['192.168.1.2'].state()
-        if 'up' in nm['192.168.1.2'].state():
+        nm.scan('192.168.1.20', '80')
+        print nm['192.168.1.20'].state()
+        if 'up' in nm['192.168.1.20'].state():
             print "Matt in network"
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
