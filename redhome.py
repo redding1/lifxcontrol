@@ -26,13 +26,6 @@ colors = {
     "gold": GOLD
 }
 
-
-#network = "192.168.1.0/24"
-#address = dottedQuadToNum("192.168.1.20")
-#networkb = networkMask("192.168.0.0",24)
-
-
-
 def main():
 
     global Matt_Home
@@ -71,15 +64,14 @@ def main():
             if AutoOnOff == True:
                 lifxlan.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
-                "Sweet Dreams. 1230 night time"
+                print "Sweet Dreams. 1230 night time"
 
         #Detect IP Leaving House
         #print addressInNetwork(address,networkb)        
         nm= nmap.PortScanner()
         try:
             nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
-            #nm.scan(Matts_iPhone_IP,'80')
-            #nm[Matts_iPhone_IP].state()
+            nm[Matts_iPhone_IP].state()
             print "found IP"
             connect_host = 1
         except KeyError, e:
