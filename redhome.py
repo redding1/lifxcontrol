@@ -8,10 +8,9 @@ from lifxlan import *
 import sys
 from datetime import datetime
 from time import sleep
-
-from netaddr import IPNetwork, IPAddress
-import socket,struct
 import nmap
+
+
 colors = {
     "red": RED, 
     "orange": ORANGE, 
@@ -40,13 +39,10 @@ def main():
     global Matt_Home_TimeOut
     global connect_host
     
-    address = dottedQuadToNum("192.168.1.20")
-    networkb = networkMask("192.168.1.0",24)
     Matts_iPhone_IP = '192.168.1.20'
     Matt_Home = True
     Matt_Home_TimeOut = 0
     connect_host = 0
-    nm = 0
     
     num_lights = 6 #Num Lights to control
     print("Discovering lights...")
@@ -59,6 +55,7 @@ def main():
     while True:
         sleep(1)
         time = datetime.now().time()
+        nm = 0
 
         #Turn On lights @ 4:00pm
         if (time.hour == 16 and time.minute == 10):
@@ -80,9 +77,9 @@ def main():
         #print addressInNetwork(address,networkb)        
         nm= nmap.PortScanner()
         try:
-            nm.scan(Matts_iPhone_IP,'80', '-n -sS -T5')
+            nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
             #nm.scan(Matts_iPhone_IP,'80')
-            #nm[Matts_Iphone_IP].state()
+            nm[Matts_iPhone_IP].state()
             print "found IP"
             connect_host = 1
         except KeyError, e:
