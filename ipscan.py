@@ -8,7 +8,7 @@ global Matt_Home
 global Matt_Home_TimeOut
 global connect_host
 
-Matts_iPhone_IP = "192.168.1.20"
+Matts_iPhone_IP = '192.168.1.20'
 Matt_Home = True
 Matt_Home_TimeOut = 0
 connect_host = 0
@@ -17,8 +17,8 @@ nm = 0
 nm= nmap.PortScanner()
 try:
     #nm.scan(Matts_iPhone_IP,'80', '-n -sS -T5')
-    nm.scan('192.168.1.21','80')
-    nm['192.168.1.21'].state()
+    nm.scan(Matts_iPhone_IP,'80')
+    nm[Matts_iPhone_IP].state()
     print "found IP"
     connect_host = 1
 except KeyError, e:
