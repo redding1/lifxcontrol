@@ -46,6 +46,7 @@ def main():
     Matt_Home = True
     Matt_Home_TimeOut = 0
     connect_host = 0
+    nm = 0
     
     num_lights = 6 #Num Lights to control
     print("Discovering lights...")
