@@ -79,7 +79,7 @@ def main():
         try:
             nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
             #nm.scan(Matts_iPhone_IP,'80')
-            nm[Matts_iPhone_IP].state()
+            #nm[Matts_iPhone_IP].state()
             print "found IP"
             connect_host = 1
         except KeyError, e:
