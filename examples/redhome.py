@@ -28,7 +28,6 @@ colors = {
 }
 
 
-#Matts_IPhone_IP = "192.168.1.20"
 #network = "192.168.1.0/24"
 #address = dottedQuadToNum("192.168.1.20")
 #networkb = networkMask("192.168.0.0",24)
@@ -39,12 +38,15 @@ def main():
 
     global Matt_Home
     global Matt_Home_TimeOut
+    global connect_host
     
     address = dottedQuadToNum("192.168.1.20")
     networkb = networkMask("192.168.0.0",24)
+    Matts_iPhone_IP = "192.168.1.20"
     Matt_Home = True
     Matt_Home_TimeOut = 0
-
+    connect_host = 0
+    
     num_lights = 6 #Num Lights to control
     print("Discovering lights...")
     lifx = LifxLAN(num_lights)
@@ -76,9 +78,16 @@ def main():
         #Detect IP Leaving House
         #print addressInNetwork(address,networkb)        
         nm= nmap.PortScanner()
-        nm.scan('192.168.1.20', '80')
-        print nm['192.168.1.20'].state()
-        if 'up' in nm['192.168.1.20'].state():
+        try:
+            nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
+            #nm[Matts_Iphone_IP].state()
+            print "found IP"
+            connect_host = 1
+        except KeyError, e:
+            connect_host = 0
+            print "didn't find IP"
+
+        if connect_host == 1:
             print "Matt in network"
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
