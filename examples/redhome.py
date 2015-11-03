@@ -11,7 +11,7 @@ from time import sleep
 
 from netaddr import IPNetwork, IPAddress
 import socket,struct
-
+import nmap
 colors = {
     "red": RED, 
     "orange": ORANGE, 
@@ -39,6 +39,7 @@ def main():
 
     global Matt_Home
     global Matt_Home_TimeOut
+    nm= nmap.PortScanner()
     address = dottedQuadToNum("192.168.1.20")
     networkb = networkMask("192.168.0.0",24)
     Matt_Home = True
@@ -73,8 +74,10 @@ def main():
                 "Sweet Dreams. 1230 night time"
 
         #Detect IP Leaving House
-        print addressInNetwork(address,networkb)        
-        if addressInNetwork(address,networkb) == True:
+        #print addressInNetwork(address,networkb)        
+        nm.scan('192.168.1.20', '80')
+        nm['192.168.1.20'].state()
+        if 'up' in nm['192.168.1.20'].state():
             print "Matt in network"
             Matt_Home_TimeOut = 0
             if Matt_Home == False:
