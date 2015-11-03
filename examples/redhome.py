@@ -76,7 +76,7 @@ def main():
         #Detect IP Leaving House
         #print addressInNetwork(address,networkb)        
         nm.scan('192.168.1.20', '80')
-        nm['192.168.1.20'].state()
+        print nm['192.168.1.20'].state()
         if 'up' in nm['192.168.1.20'].state():
             print "Matt in network"
             Matt_Home_TimeOut = 0
