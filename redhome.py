@@ -41,7 +41,7 @@ def main():
     global connect_host
     
     address = dottedQuadToNum("192.168.1.20")
-    networkb = networkMask("192.168.0.0",24)
+    networkb = networkMask("192.168.1.0",24)
     Matts_iPhone_IP = "192.168.1.20"
     Matt_Home = True
     Matt_Home_TimeOut = 0
@@ -80,7 +80,7 @@ def main():
         #print addressInNetwork(address,networkb)        
         nm= nmap.PortScanner()
         try:
-            nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
+            nm.scan(Matts_iPhone_IP,'80', '-n -sS -T5')
             #nm[Matts_Iphone_IP].state()
             print "found IP"
             connect_host = 1
