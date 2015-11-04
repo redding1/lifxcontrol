@@ -55,7 +55,7 @@ def main():
     # - allDevices = All Lights
     # - livingroom = Living Room
     # - bedroom = Bed Room
-    for i in range(0:num_lights-1):
+    for i in range(0,num_lights-1):
         if "Living" in allLights[i].get_label()       
             livingroom.append(allLights[i])
             print "Added %s to living" % allLights[i].get_label()
