@@ -65,10 +65,10 @@ def main():
     for i in range(0,num_lights):
         if "Living" in allLights[i].get_label():       
             livingroom.append(allLights[i])
-            print "Added %s to living" % allLights[i].get_label()
+            print "Added %s to Living Group" % allLights[i].get_label()
         if "Reds" in allLights[i].get_label(): # Change "Reds" to "Bed" if your lights are "Bed 1" Bed2" etc
             bedroom.append(allLights[i])
-            print "Added %s to Bed Room" % allLights[i].get_label()
+            print "Added %s to Bed Room Group" % allLights[i].get_label()
     NumLivingLights = len(livingroom)
     NumBedroomLights = len(bedroom)
     
@@ -97,7 +97,7 @@ def main():
         # **** Detect IP Leaving House ****#
         connect_host = port_scan(User_IP)
         if connect_host == 1:
-            print "IP %s Found in network"
+            print "IP %s Found in network" % User_IP
             User_IP_TimeOut = 0
             if User_Home == False:
                 User_Home = True
