@@ -9,6 +9,7 @@ from datetime import datetime
 #from time import sleep
 import time
 import nmap
+import signal
 
 
 colors = {
