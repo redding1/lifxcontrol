@@ -39,8 +39,10 @@ def main():
     global connect_host
     global livingroom
     global bedroom
-    livingroom = [0]
-    bedroom = [0]
+    global networkinfo
+    
+    livingroom = []
+    bedroom = []
     User_Home = True
     AutoOnOff = True
     User_IP_TimeOut = 0
@@ -114,8 +116,8 @@ def main():
 # Function Defs
 def port_scan(ip):
     try:
-        nm.scan(ip,'22', '-n -sS -T5')
-        nm[ip].state()
+        networkinfo.scan(ip,'22', '-n -sS -T5')
+        networkinfo[ip].state()
         print "IP Active: %s" % ip
         connect_host = 1
     except KeyError, e:
