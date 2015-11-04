@@ -37,6 +37,10 @@ def main():
     global User_Home
     global User_IP_TimeOut
     global connect_host
+    global livingroom
+    global bedroom
+    livingroom = [0]
+    bedroom = [0]
     User_Home = True
     AutoOnOff = True
     User_IP_TimeOut = 0
