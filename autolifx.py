@@ -56,10 +56,10 @@ def main():
     # - livingroom = Living Room
     # - bedroom = Bed Room
     for i in range(0,num_lights-1):
-        if "Living" in allLights[i].get_label()       
+        if "Living" in allLights[i].get_label():       
             livingroom.append(allLights[i])
             print "Added %s to living" % allLights[i].get_label()
-        if "Reds" in allLights[i].get_label() # Change "Reds" to "Bed" if your lights are "Bed 1" Bed2" etc
+        if "Reds" in allLights[i].get_label(): # Change "Reds" to "Bed" if your lights are "Bed 1" Bed2" etc
             bedroom.append(allLights[i])
             print "Added %s to Bed Room" % allLights[i].get_label()
     NumLivingLights = len(livingroom)
