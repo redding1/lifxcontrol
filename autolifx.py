@@ -107,7 +107,7 @@ def main():
                 print "User IP Timeout count: %i" % User_IP_TimeOut
 
 # Function Defs
-def port_scan(ip)
+def port_scan(ip):
     try:
         nm.scan(ip,'22', '-n -sS -T5')
         nm[ip].state()
