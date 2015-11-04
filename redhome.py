@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 #TODO
-#
-#Different states based on MattsIphone IP -> Standard Mode, Party Mode
+#Different states based on User IP -> Standard Mode, Party Mode
 
 from lifxlan import *
 import sys
 from datetime import datetime
-from time import sleep
+#from time import sleep
+import time
 import nmap
 
 
@@ -27,79 +27,112 @@ colors = {
 }
 
 def main():
-
-    global Matt_Home
-    global Matt_Home_TimeOut
-    global connect_host
-    
-    Matts_iPhone_IP = '192.168.1.20'
-    Matt_Home = True
-    Matt_Home_TimeOut = 0
-    connect_host = 0
-    
+    # User Inputs
+    User_IP = '192.168.1.20'
     num_lights = 6 #Num Lights to control
+    TimeOut_Limit = 200
+    
+    # Variables
+    global User_Home
+    global User_IP_TimeOut
+    global connect_host
+    User_Home = True
+    AutoOnOff = True
+    User_IP_TimeOut = 0
+    connect_host = 0
+    networkinfo = nmap.PortScanner()
+
+    # Inital Setup
     print("Discovering lights...")
     lifx = LifxLAN(num_lights)
-    devices = lifx.get_lights() # get devices
-    print("\nFound {} light(s):\n".format(len(devices)))
-    #for d in devices:
+    allLights = lifx.get_lights() # get allLights
+    print("\nFound {} light(s)".format(len(allLights)))
+    #for d in allLights:
         #print(d)
 
+    # Group Lights
+    # Example: All lights in Living room, change lifx bulb label to "Living something"
+    # - allDevices = All Lights
+    # - livingroom = Living Room
+    # - bedroom = Bed Room
+    for i in range(0:num_lights-1):
+        if "Living" in allLights[i].get_label()       
+            livingroom.append(allLights[i])
+            print "Added %s to living" % allLights[i].get_label()
+        if "Reds" in allLights[i].get_label() # Change "Reds" to "Bed" if your lights are "Bed 1" Bed2" etc
+            bedroom.append(allLights[i])
+            print "Added %s to Bed Room" % allLights[i].get_label()
+    NumLivingLights = len(livingroom)
+    NumBedroomLights = len(bedroom)
+    
+    # Main Program
     while True:
         sleep(1)
         time = datetime.now().time()
         nm = 0
 
-        #Turn On lights @ 4:00pm
+        # **** Timed on/off ****#
+        # Lights On
         if (time.hour == 16 and time.minute == 10):
             if AutoOnOff == False:
                 lifxlan.set_power_all_lights("on", rapid=True) #TODO: Try lifxlan.set_power_all_lights("on", 5, rapid=True) 
-                sleep(0.2)
+                sleep(0.1)
                 lifxlan.set_color_all_lights("warm_white", rapid=True)
                 AutoOnOff = True
-                print "Another Day ANOTHER LIGHT! 410 on"
-                
-        #Turn Off Lights @ 1230am
+                print "Turning Lights on %s" % time
+        # Lights Off
         if(time.hour == 0 and time.minute == 30):
             if AutoOnOff == True:
                 lifxlan.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
-                print "Sweet Dreams. 1230 night time"
+                print "Turning Lights off %s" % time
 
-        #Detect IP Leaving House
-        #print addressInNetwork(address,networkb)        
-        nm= nmap.PortScanner()
-        try:
-            nm.scan(Matts_iPhone_IP,'22', '-n -sS -T5')
-            nm[Matts_iPhone_IP].state()
-            print "found IP"
-            connect_host = 1
-        except KeyError, e:
-            connect_host = 0
-            print "didn't find IP"
-
+        # **** Detect IP Leaving House ****#
+        connect_host = port_scan(User_IP)
         if connect_host == 1:
-            print "Matt in network"
-            Matt_Home_TimeOut = 0
-            if Matt_Home == False:
-                Matt_Home = True
-                print "Welcome Home Matt!"
+            print "IP %s Found in network"
+            User_IP_TimeOut = 0
+            if User_Home == False:
+                User_Home = True
+                print "Welcome Home!"
         else:
-            print "matt not in network"
-            if Matt_Home_TimeOut > 200:
-                print "timeout over 200"
-                if Matt_Home == True:
-                    Matt_Home = False
-                    print "Goodbye Matt!"
+            print "Connection lost with %s" % User_IP
+            if User_IP_TimeOut > TimeOut_Limit:
+                print "Timeout has exceeded %i cycles." % TimeOut_Limit
+                if User_Home == True:
+                    User_Home = False
+                    print "Goodbye!"
             else:
-                Matt_Home_TimeOut += 1
-                print "Matt Timeout: %i" % Matt_Home_TimeOut  
+                User_IP_TimeOut += 1
+                print "User IP Timeout count: %i" % User_IP_TimeOut
 
+# Function Defs
+def port_scan(ip)
+    try:
+        nm.scan(ip,'22', '-n -sS -T5')
+        nm[ip].state()
+        print "IP Active: %s" % ip
+        connect_host = 1
+    except KeyError, e:
+        connect_host = 0
+        print "IP Inactive: %s" % ip
+    return connect_host    
 
-#for i in range(0:num_lights-1):
-#if "Living" in devices[i].get_label()       
-#living.append(devices[i])
+def exit_gracefully(signum, frame):
+    # restore the original signal handler as otherwise evil things will happen
+    # in raw_input when CTRL+C is pressed, and our signal handler is not re-entrant
+    signal.signal(signal.SIGINT, original_sigint)
 
+    try:
+        if raw_input("\nReally quit? (y/n)> ").lower().startswith('y'):
+            sys.exit(1)
+
+    except KeyboardInterrupt:
+        print("Ok ok, quitting")
+        sys.exit(1)
+
+    # restore the exit gracefully handler here    
+    signal.signal(signal.SIGINT, exit_gracefully)
       
 def toggle_device_power(device, interval=0.5, num_cycles=3): #TEST
     original_power_state = device.get_power()
@@ -123,4 +156,6 @@ def toggle_light_color(light, interval=0.5, num_cycles=3):
     light.set_color(original_color)
 
 if __name__=="__main__":
+    original_sigint = signal.getsignal(signal.SIGINT)
+    signal.signal(signal.SIGINT, exit_gracefully)
     main()
