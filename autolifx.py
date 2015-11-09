@@ -80,8 +80,8 @@ def main():
 
         # **** Timed on/off ****#
         # Lights On
-        print "Current time: %s" % time.hour
-        print "Current time: %s" % time.minute
+        #print "Current time: %s" % time.hour
+        #print "Current time: %s" % time.minute
         if (time.hour == 16 and time.minute == 10):
             if AutoOnOff == False:
                 lifxlan.set_power_all_lights("on", rapid=True) #TODO: Try lifxlan.set_power_all_lights("on", 5, rapid=True) 
@@ -90,7 +90,7 @@ def main():
                 AutoOnOff = True
                 print "Turning Lights on %s" % time
         # Lights Off
-        if(time.hour == 22 and time.minute == 52):
+        if(time.hour == 22 and time.minute == 00):
             if AutoOnOff == True:
                 lifxlan.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
