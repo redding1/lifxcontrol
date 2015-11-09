@@ -9,15 +9,17 @@
 import numpy as np
 import librosa # Librosa for audio
 import matplotlib.pyplot as plt # matplotlib for displaying the output
-%matplotlib inline # And seaborn to make it look nice
+#matplotlib inline
+
+# And seaborn to make it look nice
 import seaborn
 seaborn.set(style='ticks')
 import IPython.display  # and IPython.display for audio output
 
 #Test Audio File
-#audio_path = librosa.util.example_audio_file()
+audio_path = librosa.util.example_audio_file()
 
-audio_path = '/path/to/your/favorite/song.mp3'
+#audio_path = '/path/to/your/favorite/song.mp3'
 y, sr = librosa.load(audio_path)
 
 #librosa.load(audio_path, sr=44100) #Sample 22050Hz Default
