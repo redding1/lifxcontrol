@@ -66,7 +66,7 @@ def main():
         if "Living" in allLights[i].get_label():       
             livingroom.append(allLights[i])
             print "Added %s to Living Group" % allLights[i].get_label()
-        if "Reds" in allLights[i].get_label(): # Change "Reds" to "Bed" if your lights are "Bed 1" Bed2" etc
+        if "Bedroom" in allLights[i].get_label():
             bedroom.append(allLights[i])
             print "Added %s to Bed Room Group" % allLights[i].get_label()
     NumLivingLights = len(livingroom)
@@ -90,7 +90,7 @@ def main():
                 AutoOnOff = True
                 print "Turning Lights on %s" % time
         # Lights Off
-        if(time.hour == 22 and time.minute == 05):
+        if(time.hour == 23 and time.minute == 30):
             if AutoOnOff == True:
                 lifx.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
