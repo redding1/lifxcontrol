@@ -88,7 +88,7 @@ def main():
                 AutoOnOff = True
                 print "Turning Lights on %s" % time
         # Lights Off
-        if(time.hour == 0 and time.minute == 30):
+        if(time.hour == 22 and time.minute == 52):
             if AutoOnOff == True:
                 lifxlan.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
