@@ -32,7 +32,8 @@ def main():
     User_IP = '192.168.1.20'
     num_lights = 6 #Num Lights to control
     TimeOut_Limit = 200
-    
+    DayLightSavings = 1
+
     # Variables
     global User_Home
     global User_IP_TimeOut
@@ -82,15 +83,15 @@ def main():
         # Lights On
         #print "Current time: %s" % time.hour
         #print "Current time: %s" % time.minute
-        if (time.hour == 16 and time.minute == 10):
+        if ((time.hour + DayLightSavings) == 16 and time.minute == 10):
             if AutoOnOff == False:
                 lifx.set_power_all_lights("on", rapid=True) #TODO: Try lifxlan.set_power_all_lights("on", 5, rapid=True) 
                 sleep(0.1)
-                lifx.set_color_all_lights("warm_white", rapid=True)
+                lifx.set_color_all_lights(warm_white, rapid=True)
                 AutoOnOff = True
                 print "Turning Lights on %s" % time
         # Lights Off
-        if(time.hour == 23 and time.minute == 30):
+        if((time.hour + DayLightSavings) == 23 and time.minute == 30):
             if AutoOnOff == True:
                 lifx.set_power_all_lights("off", rapid=True)
                 AutoOnOff = False
