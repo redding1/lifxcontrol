@@ -67,6 +67,7 @@ def main():
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
+    global half_period_ms
     print "BPM is: %f" % bpm
     print "device is:"
     print(device)
