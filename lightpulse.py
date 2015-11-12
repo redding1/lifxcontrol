@@ -70,7 +70,8 @@ def pulse_device(device, bpm, brightnesschange):
     print "BPM is: %f" % bpm
     print "device is:"
     print(device)
-    half_period_ms = (bpm*500/60)
+    half_period_ms = (60/bpm)
+    half_period_ms =  half_period_ms/2
     original_color = device.get_color()
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
