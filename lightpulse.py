@@ -66,7 +66,7 @@ def main():
         pulse_device(bedroom[0], bpm=100, brightnesschange=0.5)
 
 # Function Defs
-def pulse_device(device, bpm=60, brightnesschange=0.5):
+def pulse_device(device, bpm, brightnesschange):
     print "BPM is: %f" % bpm
     print "device is:"
     print(device)
