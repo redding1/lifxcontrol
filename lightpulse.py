@@ -78,10 +78,10 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     while True:
         print "dimming %f" % half_period_ms
         device.set_color(dim_color, half_period_ms, rapid=False)
-        sleep(0.5)
+        time.sleep(half_period_ms / 1000.0)
         device.set_color(original_color, half_period_ms, rapid=False)
         print "restore"
-        sleep(0.5)
+        time.sleep(half_period_ms / 1000.0)
 
 def exit_gracefully(signum, frame):
     # restore the original signal handler as otherwise evil things will happen
