@@ -63,16 +63,14 @@ def main():
     # Main Program
     print "Program Starting..."
     while True:
-        pulse_device(bedroom[0], bpm=150, brightnesschange=0.5)
+        pulse_device(bedroom[0], bpm=60, brightnesschange=0.2)
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
-    global half_period_ms
     print "BPM is: %f" % bpm
     print "device is:"
     print(device)
     half_period_ms = 100.00
-    print "Wait Delay = %f" % half_period_ms
     print "Wait Delay = %f" % half_period_ms
     half_period_ms = bpm/60.000
     print "Wait Delay = %f" % half_period_ms
@@ -87,7 +85,6 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     print "enter loop"
     count = 0
     while True:
-        global half_period_ms
         count = count + 1
         print "Counter: %s" % count
         print "Wait Delay = %f ms" % half_period_ms
