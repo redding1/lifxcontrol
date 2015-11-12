@@ -77,9 +77,9 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     print "enter loop"
     while True:
         print "dimming %f" % half_period_ms
-        device.set_color(dim_color, half_period_ms, rapid=True)
+        device.set_color(dim_color, half_period_ms, rapid=False)
         sleep(0.5)
-        device.set_color(original_color, half_period_ms, rapid=True)
+        device.set_color(original_color, half_period_ms, rapid=False)
         print "restore"
         sleep(0.5)
 
