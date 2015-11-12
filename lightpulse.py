@@ -67,17 +67,14 @@ def main():
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
-    print "BPM is: %f" % bpm
-    print "device is:"
-    print(device)
     half_period_ms = 100.00
-    print "Wait Delay = %f" % half_period_ms
     half_period_ms = bpm/60.000
-    print "Wait Delay = %f" % half_period_ms
     half_period_ms = half_period_ms*2
-    print "Wait Delay = %f" % half_period_ms
     half_period_ms = 1/half_period_ms
     half_period_ms = half_period_ms*1000
+    print "device is:"
+    print(device)
+    print "BPM is: %f" % bpm
     print "Wait Delay = %f" % half_period_ms
     original_color = device.get_color()
     dim_color = list(copy(original_color))
@@ -85,9 +82,6 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     print "enter loop"
     count = 0
     while True:
-        count = count + 1
-        print "Counter: %s" % count
-        print "Wait Delay = %f ms" % half_period_ms
         device.set_color(dim_color, half_period_ms, rapid=False)
         time.sleep(half_period_ms / 1000.0)
         device.set_color(original_color, half_period_ms, rapid=False)
