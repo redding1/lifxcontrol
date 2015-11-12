@@ -78,9 +78,9 @@ def pulse_device(device, bpm=100, brightnesschange=0.5):
         print "dimming %f" % half_period_ms
         device.set_color(dim_color, half_period_ms, rapid=True)
         sleep(half_period_ms/1000)
+        sleep(1)
         device.set_color(original_color, half_period_ms, rapid=True)
         print "restore"
-        sleep(1)
         sleep(half_period_ms/1000)
 
 def exit_gracefully(signum, frame):
