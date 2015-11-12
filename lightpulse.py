@@ -84,6 +84,7 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     print "enter loop"
     count = 0
     while True:
+        global half_period_ms
         count = count + 1
         print "Counter: %s" % count
         print "Wait Delay = %f ms" % half_period_ms
