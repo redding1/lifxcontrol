@@ -72,16 +72,19 @@ def pulse_device(device, bpm, brightnesschange):
     print(device)
     half_period_ms = (60/bpm)
     half_period_ms =  half_period_ms/2
+    print "Wait Delay = %f" % half_period_ms
     original_color = device.get_color()
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
     print "enter loop"
+    count = 0
     while True:
-        print "dimming %f" % half_period_ms
+        count = count + 1
+        print "Counter: %s" % count
+        print "Wait Delay = %f ms" % half_period_ms
         device.set_color(dim_color, half_period_ms, rapid=False)
         time.sleep(half_period_ms / 1000.0)
         device.set_color(original_color, half_period_ms, rapid=False)
-        print "restore"
         time.sleep(half_period_ms / 1000.0)
 
 def exit_gracefully(signum, frame):
