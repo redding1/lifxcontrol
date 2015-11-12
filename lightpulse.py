@@ -63,7 +63,7 @@ def main():
     # Main Program
     print "Program Starting..."
     while True:
-        pulse_device(bedroom[1], bpm=100, brightnesschange=0.5)
+        pulse_device(bedroom[0], bpm=100, brightnesschange=0.5)
 
 # Function Defs
 def pulse_device(device, bpm=100, brightnesschange=0.5):
@@ -72,10 +72,13 @@ def pulse_device(device, bpm=100, brightnesschange=0.5):
     original_color = device.get_color()
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
+    print "enter loop"
     while True:
         device.set_color(dim_color, half_period_ms, rapid=True)
+        print "dimming"
         sleep(half_period_ms/1000)
         device.set_color(original_color, half_period_ms, rapid=True)
+        print "restore"
         sleep(half_period_ms/1000)
 
 def exit_gracefully(signum, frame):
