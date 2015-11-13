@@ -81,11 +81,13 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     dim_color[2] = int(dim_color[2]*brightnesschange)
     print "enter loop"
     last_beat = time.time()
-    last_beat = last_beat*1000
+    last_beat = last_beat-1447400000
+    last_beat = last_beat-*1000
     dimed = 0
     lit = 0
     while True:
         current_time = time.time()
+        current_time = current_time - 1447400000
         current_time = current_time*1000
         if current_time > (last_beat + half_period_ms) and dimed == 0:
             device.set_color(dim_color, half_period_ms, rapid=False)
@@ -98,7 +100,8 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
         if current_time > last_beat + 2*half_period_ms:
             #New Beat Starting
             last_beat = time.time()
-            last_beat = last_beat*1000
+            last_beat = last_beat-1447400000
+            last_beat = last_beat-*1000
             dimed = 0
             lit = 0
             print "New Beat"
