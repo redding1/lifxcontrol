@@ -82,7 +82,7 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     print "enter loop"
     last_beat = time.time()
     last_beat = last_beat-1447400000
-    last_beat = last_beat-*1000
+    last_beat = last_beat*1000
     dimed = 0
     lit = 0
     while True:
@@ -101,7 +101,7 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
             #New Beat Starting
             last_beat = time.time()
             last_beat = last_beat-1447400000
-            last_beat = last_beat-*1000
+            last_beat = last_beat*1000
             dimed = 0
             lit = 0
             print "New Beat"
