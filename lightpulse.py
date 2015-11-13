@@ -85,15 +85,15 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     lit = 0
     while True:
         current_time = time.time()
-        if current_time > (last_time + half_period_s) and dimed == 0:
+        if current_time > (last_beat + half_period_s) and dimed == 0:
             device.set_color(dim_color, half_period_ms, rapid=False)
             dimed = 1
             print "Dim"
-        if current_time > (last_time + half_period_s*2) and lit == 0:
+        if current_time > (last_beat + half_period_s*2) and lit == 0:
             device.set_color(original_color, half_period_ms, rapid=False)
             lit = 1
             print "Lit"
-        if current_time > last_time + 2*half_period_s:
+        if current_time > last_beat + 2*half_period_s:
             #New Beat Starting
             last_beat = time.time()
             dimed = 0
