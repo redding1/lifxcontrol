@@ -67,7 +67,7 @@ def main():
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
-    half_period_s = 100.00
+    half_period_s = 100.000e
     half_period_s = bpm/60.000
     half_period_s = half_period_s*2
     half_period_s = 1/half_period_s
@@ -81,19 +81,21 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     dim_color[2] = int(dim_color[2]*brightnesschange)
     print "enter loop"
     last_beat = time.time()
+    last_beat = last_beat*1000
     dimed = 0
     lit = 0
     while True:
         current_time = time.time()
-        if current_time > (last_beat + half_period_s) and dimed == 0:
+        current_time = current_time*1000
+        if current_time > (last_beat + half_period_ms) and dimed == 0:
             device.set_color(dim_color, half_period_ms, rapid=False)
             dimed = 1
             print "Dim"
-        if current_time > (last_beat + half_period_s*2) and lit == 0:
+        if current_time > (last_beat + half_period_ms*2) and lit == 0:
             device.set_color(original_color, half_period_ms, rapid=False)
             lit = 1
             print "Lit"
-        if current_time > last_beat + 2*half_period_s:
+        if current_time > last_beat + 2*half_period_ms:
             #New Beat Starting
             last_beat = time.time()
             dimed = 0
