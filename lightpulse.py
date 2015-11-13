@@ -71,7 +71,7 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
     half_period_s = bpm/60.000
     half_period_s = half_period_s*2
     half_period_s = 1/half_period_s
-    half_period_ms = half_period_ms*1000
+    half_period_ms = half_period_s*1000
     print "device is:"
     print(device)
     print "BPM is: %f" % bpm
