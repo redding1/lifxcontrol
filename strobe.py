@@ -24,7 +24,7 @@ def main():
     lifx.set_color_all_lights(WHITE, rapid=True)
     print("Toggling power of all lights...")
     while True:
-        toggle_all_lights_power(lifx, 0.1)
+        toggle_all_lights_power(lifx, 0.06)
 
 
 
