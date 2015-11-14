@@ -63,7 +63,7 @@ def main():
     # Main Program
     print "Program Starting..."
     while True:
-        pulse_device(livingroom[0], bpm=60, brightnesschange=0.5)
+        pulse_device(livingroom[0], bpm=140, brightnesschange=0.3)
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
