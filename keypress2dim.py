@@ -36,9 +36,7 @@ def main():
     livingroom = []
     bedroom = []
 
-    stdscr = curses.initscr()
-    curses.cbreak()
-    stdscr.keypad(1)
+
 
 
     # Inital Setup
@@ -69,16 +67,23 @@ def main():
     stdscr.addstr(0,10,"Hit 'q' to quit")
     stdscr.refresh()
     key = ''
+    original_color = livingroom[0].get_color()
+    dim_color = list(copy(original_color))
+    dim_color[2] = int(dim_color[2]*brightnesschange)
+    half_period_ms = 200
+    stdscr = curses.initscr()
+    curses.cbreak()
+    stdscr.keypad(1)
     while key != ord('q'):
         key = stdscr.getch()
         stdscr.addch(20,25,key)
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            pulse_device(livingroom[0], bpm=140, brightnesschange=0.3)
+            device.set_color(dim_color, half_period_ms, rapid=True)
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            pulse_device(livingroom[1], bpm=140, brightnesschange=0.3)
+            device.set_color(original_color, half_period_ms, rapid=True)
     curses.endwin()
 
 # Function Defs
