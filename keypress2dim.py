@@ -96,16 +96,18 @@ def main():
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            light1.start()
+            light1.run()
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            light2.start()
+            light2.run()
     curses.endwin()
 
 def pulse_device_once(device, half_period_ms=200, dim_color=[0,0,0,0], original_color=[0,0,0,0]):
     device.set_color(dim_color, half_period_ms, rapid=True)
     sleep(half_period_ms/1000)
     device.set_color(original_color, half_period_ms, rapid=True)
+    return
+
 
 def exit_gracefully(signum, frame):
     # restore the original signal handler as otherwise evil things will happen
