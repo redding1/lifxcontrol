@@ -62,8 +62,14 @@ def main():
     # Main Program
     print "Program Starting..."
     #thread.start_new_thread(pulse_device, (livingroom[0], 140, 0.3) )
-    th = threading.Thread(target=pulse_device, args=(livingroom[0],60,0.5))
-    th.start()
+    light1 = threading.Thread(target=pulse_device, args=(livingroom[0],100,0.5))
+    light2 = threading.Thread(target=pulse_device, args=(livingroom[1],100,0.5))
+    light3 = threading.Thread(target=pulse_device, args=(livingroom[2],100,0.5))
+    light4 = threading.Thread(target=pulse_device, args=(livingroom[3],100,0.5))
+    light1.start()
+    light2.start()
+    light3.start()
+    light4.start()
     print "Program End.."
     #pulse_device(livingroom[0], bpm=140, brightnesschange=0.3)
 
