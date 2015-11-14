@@ -59,7 +59,7 @@ class Light(Device):
         if len(color) == 4:
             try:
                 if rapid:
-                    self.fire_and_forget(LightSetColor, {"color": color, "duration": duration}, num_repeats=5)
+                    self.fire_and_forget(LightSetColor, {"color": color, "duration": duration}, num_repeats=2)
                 else:
                     self.req_with_ack(LightSetColor, {"color": color, "duration": duration})
             except WorkflowException as e:

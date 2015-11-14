@@ -90,11 +90,11 @@ def pulse_device(device, bpm=60, brightnesschange=0.5):
         current_time = current_time - 1447400000
         current_time = current_time*1000
         if current_time > (last_beat + half_period_ms) and dimed == 0:
-            device.set_color(dim_color, half_period_ms, rapid=False)
+            device.set_color(dim_color, half_period_ms, rapid=True)
             dimed = 1
             print "Dim"
         if current_time > (last_beat + half_period_ms*2) and lit == 0:
-            device.set_color(original_color, half_period_ms, rapid=False)
+            device.set_color(original_color, half_period_ms, rapid=True)
             lit = 1
             print "Lit"
         if current_time > last_beat + 2*half_period_ms:
