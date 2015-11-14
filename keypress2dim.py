@@ -96,10 +96,12 @@ def main():
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            light1.run()
+            light1 = threading.Thread(target=pulse_device_once, args=(livingroom[0], half_period_ms, dim_color, original_color))
+            light1.start()
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            light2.run()
+            light2 = threading.Thread(target=pulse_device_once, args=(livingroom[1], half_period_ms, dim_color, original_color))
+            light2.start()
     curses.endwin()
 
 def pulse_device_once(device, half_period_ms=200, dim_color=[0,0,0,0], original_color=[0,0,0,0]):
