@@ -64,6 +64,9 @@ def main():
     
     # Main Program
     print "Program Starting..."
+    stdscr = curses.initscr()
+    curses.cbreak()
+    stdscr.keypad(1)
     stdscr.addstr(0,10,"Hit 'q' to quit")
     stdscr.refresh()
     key = ''
@@ -71,9 +74,6 @@ def main():
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
     half_period_ms = 200
-    stdscr = curses.initscr()
-    curses.cbreak()
-    stdscr.keypad(1)
     while key != ord('q'):
         key = stdscr.getch()
         stdscr.addch(20,25,key)
