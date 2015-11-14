@@ -97,7 +97,7 @@ def main():
             pulse_device_once(livingroom[0], half_period_ms, dim_colour, original_color)
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            pulse_device_once(livingroom[1], half_period_ms=200, dim_colour, original_color)
+            pulse_device_once(livingroom[1], half_period_ms, dim_colour, original_color)
     curses.endwin()
 
 def pulse_device_once(device, half_period_ms=200, dim_colour, original_color):
