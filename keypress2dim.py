@@ -9,6 +9,7 @@ import time
 import signal
 from copy import copy
 import curses
+import threading
 
 colors = {
     "red": RED, 
@@ -32,6 +33,8 @@ def main():
     # Variables
     global livingroom
     global bedroom
+    global bpm
+    global brightnesschange
      
     livingroom = []
     bedroom = []
@@ -72,8 +75,15 @@ def main():
     key = ''
 
 
-    half_period_ms = 200
+    bpm = 80
     brightnesschange = 0.6
+
+    
+    half_period_s = 100.000
+    half_period_s = bpm/60.000
+    half_period_s = half_period_s*2
+    half_period_s = 1/half_period_s
+    half_period_ms = half_period_s*1000
     original_color = livingroom[0].get_color()
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
@@ -84,12 +94,16 @@ def main():
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            livingroom[0].set_color(dim_color, half_period_ms, rapid=True)
+            pulse_device_once(livingroom[0], half_period_ms, dim_colour, original_color)
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            livingroom[0].set_color(original_color, half_period_ms, rapid=True)
+            pulse_device_once(livingroom[1], half_period_ms=200, dim_colour, original_color)
     curses.endwin()
 
+def pulse_device_once(device, half_period_ms=200, dim_colour, original_color):
+    device.set_color(dim_color, half_period_ms, rapid=True)
+    sleep(half_period_ms/1000)
+    device.set_color(original_color, half_period_ms, rapid=True)
 
 def exit_gracefully(signum, frame):
     # restore the original signal handler as otherwise evil things will happen
