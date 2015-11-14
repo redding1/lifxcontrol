@@ -72,11 +72,11 @@ class LifxLAN:
             if power_level in on and not rapid:
                 self.broadcast_with_ack(LightSetPower, {"power_level": 65535, "duration": duration})
             elif power_level in on and rapid:
-                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 65535, "duration": duration}, num_repeats=1)
+                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 65535, "duration": duration}, num_repeats=10)
             elif power_level in off and not rapid:
                 self.broadcast_with_ack(LightSetPower, {"power_level": 0, "duration": duration})
             elif power_level in off and rapid:
-                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 0, "duration": duration}, num_repeats=1)
+                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 0, "duration": duration}, num_repeats=10)
             else:
                 print("{} is not a valid power level.".format(power_level))
         except WorkflowException as e:
@@ -149,7 +149,7 @@ class LifxLAN:
         self.initialize_socket(timeout_secs)
         msg = msg_type(BROADCAST_MAC, self.source_id, seq_num=0, payload=payload, ack_requested=False, response_requested=False)
         sent_msg_count = 0
-        sleep_interval = 0.1 if num_repeats > 20 else 0
+        sleep_interval = 0.05 if num_repeats > 20 else 0
         while(sent_msg_count < num_repeats):
             self.sock.sendto(msg.packed_message, (UDP_BROADCAST_IP, UDP_BROADCAST_PORT))
             if self.verbose:
