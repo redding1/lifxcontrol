@@ -72,11 +72,11 @@ class LifxLAN:
             if power_level in on and not rapid:
                 self.broadcast_with_ack(LightSetPower, {"power_level": 65535, "duration": duration})
             elif power_level in on and rapid:
-                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 65535, "duration": duration}, num_repeats=5)
+                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 65535, "duration": duration}, num_repeats=1)
             elif power_level in off and not rapid:
                 self.broadcast_with_ack(LightSetPower, {"power_level": 0, "duration": duration})
             elif power_level in off and rapid:
-                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 0, "duration": duration}, num_repeats=5)
+                self.broadcast_fire_and_forget(LightSetPower, {"power_level": 0, "duration": duration}, num_repeats=1)
             else:
                 print("{} is not a valid power level.".format(power_level))
         except WorkflowException as e:
