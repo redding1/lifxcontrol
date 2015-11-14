@@ -100,7 +100,7 @@ def main():
             pulse_device_once(livingroom[1], half_period_ms, dim_colour, original_color)
     curses.endwin()
 
-def pulse_device_once(device, half_period_ms=200, dim_colour, original_color):
+def pulse_device_once(device, half_period_ms, dim_colour, original_color):
     device.set_color(dim_color, half_period_ms, rapid=True)
     sleep(half_period_ms/1000)
     device.set_color(original_color, half_period_ms, rapid=True)
