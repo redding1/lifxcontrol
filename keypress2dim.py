@@ -75,8 +75,8 @@ def main():
     key = ''
 
 
-    bpm = 80
-    brightnesschange = 0.6
+    bpm = 120
+    brightnesschange = 0.5
 
     
     half_period_s = 100.000
@@ -88,16 +88,18 @@ def main():
     dim_color = list(copy(original_color))
     dim_color[2] = int(dim_color[2]*brightnesschange)
 
+    light1 = threading.Thread(target=pulse_device_once, args=(livingroom[0], half_period_ms, dim_color, original_color))
+    light2 = threading.Thread(target=pulse_device_once, args=(livingroom[1], half_period_ms, dim_color, original_color))
     while key != ord('q'):
         key = stdscr.getch()
         stdscr.addch(20,25,key)
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            pulse_device_once(livingroom[0], half_period_ms, dim_color, original_color)
+            light1.start()
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            pulse_device_once(livingroom[1], half_period_ms, dim_color, original_color)
+            light2.start()
     curses.endwin()
 
 def pulse_device_once(device, half_period_ms=200, dim_color=[0,0,0,0], original_color=[0,0,0,0]):
