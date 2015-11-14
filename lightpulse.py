@@ -5,11 +5,10 @@
 
 from lifxlan import *
 import sys
-from datetime import datetime
 import time
 import signal
 from copy import copy
-
+import threading
 
 colors = {
     "red": RED, 
@@ -62,8 +61,9 @@ def main():
     
     # Main Program
     print "Program Starting..."
-    while True:
-        pulse_device(livingroom[0], bpm=140, brightnesschange=0.3)
+    thread.start_new_thread(pulse_device, (livingroom[0], 140, 0.3) )
+    print "Program End.."
+    #pulse_device(livingroom[0], bpm=140, brightnesschange=0.3)
 
 # Function Defs
 def pulse_device(device, bpm=60, brightnesschange=0.5):
