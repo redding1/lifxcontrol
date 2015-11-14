@@ -21,7 +21,7 @@ def main():
     num_lights = 6
     lifx = LifxLAN(num_lights)
 
-    lifx.set_color_all_lights(white, rapid=True)
+    lifx.set_color_all_lights(WHITE, rapid=True)
     print("Toggling power of all lights...")
     while True:
         toggle_all_lights_power(lifx, 0.1)
