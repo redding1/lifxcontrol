@@ -84,25 +84,12 @@ def main():
         stdscr.refresh()
         if key == curses.KEY_UP: 
             stdscr.addstr(2, 20, "Up")
-            device.set_color(dim_color, half_period_ms, rapid=True)
+            livingroom[0].set_color(dim_color, half_period_ms, rapid=True)
         elif key == curses.KEY_DOWN: 
             stdscr.addstr(3, 20, "Down")
-            device.set_color(original_color, half_period_ms, rapid=True)
+            livingroom[0].set_color(original_color, half_period_ms, rapid=True)
     curses.endwin()
 
-# Function Defs
-def pulse_device(device, bpm=60, brightnesschange=0.5):
-    half_period_s = 100.000
-    half_period_s = bpm/60.000
-    half_period_s = half_period_s*2
-    half_period_s = 1/half_period_s
-    half_period_ms = half_period_s*1000
-    original_color = device.get_color()
-    dim_color = list(copy(original_color))
-    dim_color[2] = int(dim_color[2]*brightnesschange)
-    device.set_color(dim_color, half_period_ms, rapid=True)
-    sleep(half_period_s)
-    device.set_color(original_color, half_period_ms, rapid=True)
 
 def exit_gracefully(signum, frame):
     # restore the original signal handler as otherwise evil things will happen
