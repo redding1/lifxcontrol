@@ -149,7 +149,7 @@ class LifxLAN:
         self.initialize_socket(timeout_secs)
         msg = msg_type(BROADCAST_MAC, self.source_id, seq_num=0, payload=payload, ack_requested=False, response_requested=False)
         sent_msg_count = 0
-        sleep_interval = 0.01 if num_repeats > 20 else 0
+        sleep_interval = 0.1 if num_repeats > 20 else 0
         while(sent_msg_count < num_repeats):
             self.sock.sendto(msg.packed_message, (UDP_BROADCAST_IP, UDP_BROADCAST_PORT))
             if self.verbose:
